@@ -3,20 +3,11 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types';
 import './index.css';
-
+import { authenticationService } from '../../services/authentication.service';
 import lar from '../../assets/images/login.png';
 
 async function loginUser(credentials) {
-    const baseApiUrl = "https://localhost:5001/api";
-    const authUrl = baseApiUrl + "/authentication/authenticate";
-  return fetch(authUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-  .then(data => data.json())
+  return await authenticationService.login(credentials);
 }
 
 export default function Login({ setToken }) {
